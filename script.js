@@ -30,7 +30,7 @@ showStep(currentStep);
 document.getElementById("multiStepForm").addEventListener("submit", function(e) {
   e.preventDefault();
   const formData = new FormData(this);
-  fetch("https://script.google.com/macros/s/AKfycbxZNSSLTQN5QmLNAmgyPNbHIj0JnFZ5lNM_EwHeXgNADmgHzqpgG9vNIO_H_E9HW4LA/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbw5iVxf8HCDXNls1yYt-ZWHiWuuD_e_KClg4Wl7i4i65aXGmN775avUnNU8PJdUSWgJ/exec", {
     method: "POST",
     mode: "no-cors",
     body: new URLSearchParams(formData)
