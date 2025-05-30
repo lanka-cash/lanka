@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CeyLoan</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .loan-box {
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .input-group input[type="number"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .input-group span {
+      padding-left: 10px;
+      font-weight: bold;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #666;
+    }
+
+    input[type="tel"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .repayment-info {
+      font-size: 15px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .repayment-info strong {
+      font-weight: bold;
+    }
+
+    button {
+      background-color: #00c853;
+      color: white;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #00b347;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Fast online loans up to Rs 500,000</h1>
+    <p class="subtitle">Only NIC is required. Get your money in 5 minutes.</p>
+
+    <div class="loan-box">
+      <label for="loanAmount">Loan amount</label>
+      <div class="input-group">
+        <input type="number" id="loanAmount" value="30000" min="30000" max="500000" step="1000">
+        <span>|RS</span>
+      </div>
+
+      <input type="range" id="loanSlider" min="30000" max="500000" value="30000" step="1000">
+      <div class="range-labels">
+        <span>30,000</span>
+        <span>500,000</span>
+      </div>
+
+      <input type="tel" id="phone" placeholder="Enter phone number">
+
+      <div class="repayment-info">
+        <p>Total repayment amount: <strong id="repaymentAmount">Rs 33,000</strong></p>
+        <p>Repayment period: <strong id="repaymentPeriod">6 months</strong></p>
+      </div>
+
+      <button>Apply for a Loan</button>
+    </div>
+  </div>
+
+  <script>
+    const loanAmountInput = document.getElementById('loanAmount');
+    const loanSlider = document.getElementById('loanSlider');
+    const repaymentAmount = document.getElementById('repaymentAmount');
+    const repaymentPeriod = document.getElementById('repaymentPeriod');
+
+    function updateUI(value) {
+      const numericValue = parseInt(value, 10);
+      loanAmountInput.value = numericValue;
+      loanSlider.value = numericValue;
+
+      // Calculate repayment with 10% interest
+      const interest = numericValue * 0.10;
+      const total = numericValue + interest;
+      repaymentAmount.textContent = Rs ${total.toLocaleString()};
+
+      // Set months based on ranges
+      let months;
+      if (numericValue <= 120000) {
+        months = "6 months";
+      } else if (numericValue <= 170000) {
+        months = "12 months";
+      } else if (numericValue <= 300000) {
+        months = "24 months";
+      } else {
+        months = "36 months";
+      }
+
+      repaymentPeriod.textContent = months;
+    }
+
+    loanAmountInput.addEventListener('input', e => updateUI(e.target.value));
+    loanSlider.addEventListener('input', e => updateUI(e.target.value));
+
+    // Initial UI update
+    updateUI(30000);
+  </script>
+</body>
+</html>
